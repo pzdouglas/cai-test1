@@ -1,0 +1,527 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Zebra CAI API",
+    "description" : "Clinical Asset Intelligence ASP.NET Core Web API",
+    "termsOfService" : "None",
+    "contact" : {
+      "name" : "Peter Kelso",
+      "url" : "http://www.developer.zebra.com",
+      "email" : "pkelso@zebra.com"
+    }
+  },
+  "paths" : {
+    "/Assets" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "AssetsGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ClientGiaiModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/InventoryTags" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "InventoryGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CurrentInventoryTag"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/LocationHierarchy" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "LocationHierarchyGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/LocationHierarchyNode"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/LocationHierarchyNames" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "LocationHierarchyNamesGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/LocationHierarchyNames"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AssetCategories" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "AssetCategoriesGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/AssetCategory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ManualInventory/{locationId}" : {
+      "post" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "ManualInventoryByLocationIdPost",
+        "consumes" : [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "tagArray",
+          "in" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ManualInventoryTag"
+            }
+          }
+        }, {
+          "name" : "locationId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/Reports/TagHistory/{tagId}" : {
+      "get" : {
+        "tags" : [ "Inventory" ],
+        "operationId" : "ReportsTagHistoryByTagIdGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "tagId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/TagHistoryItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Notifications/GetAlerts/{notificationType}" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "operationId" : "NotificationsGetAlertsByNotificationTypeGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "notificationType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Notification"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Notifications/GetRecipients/{notificationType}" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "operationId" : "NotificationsGetRecipientsByNotificationTypeGet",
+        "consumes" : [ ],
+        "produces" : [ "text/plain", "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "notificationType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/NotificationEmail"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Notifications/Add/{msgType}/{msg}" : {
+      "post" : {
+        "tags" : [ "Notification" ],
+        "operationId" : "NotificationsAddByMsgTypeByMsgPost",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "msgType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "msg",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/Notifications/Update/{msgType}" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "operationId" : "NotificationsUpdateByMsgTypeGet",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "notificationType",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "msgType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    },
+    "/Notifications/Send/{msgType}" : {
+      "get" : {
+        "tags" : [ "Notification" ],
+        "operationId" : "NotificationsSendByMsgTypeGet",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "name" : "msgType",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ClientGiaiModel" : {
+      "type" : "object",
+      "properties" : {
+        "tagId" : {
+          "type" : "string"
+        },
+        "category" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "state" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "preventiveMaintenance" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "preventiveInterval" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "leasedAsset" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "assetId" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "productionDate" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "dueDate" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "expirationDate" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "serialNumber" : {
+          "type" : "string"
+        },
+        "gs1ManufacturingId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "locationId" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "CurrentInventoryTag" : {
+      "type" : "object",
+      "properties" : {
+        "tagId" : {
+          "type" : "string"
+        },
+        "lastSeenInNetwork" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "locationId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "tagStateId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "userData" : {
+          "format" : "byte",
+          "type" : "string"
+        }
+      }
+    },
+    "LocationHierarchyNode" : {
+      "type" : "object",
+      "properties" : {
+        "isLeafNode" : {
+          "type" : "boolean"
+        },
+        "locationId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "locationLevelName" : {
+          "type" : "string"
+        },
+        "locationLevelId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "hierarchyLevel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "parentLocationId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "locationName" : {
+          "type" : "string"
+        },
+        "antennaType" : {
+          "type" : "string"
+        },
+        "pointX" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "pointY" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "mapFile" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LocationHierarchyNames" : {
+      "type" : "object",
+      "properties" : {
+        "hierarchylevel" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "hierarchyName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AssetCategory" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ManualInventoryTag" : {
+      "type" : "object",
+      "properties" : {
+        "tagid" : {
+          "type" : "string"
+        },
+        "epcdata" : {
+          "type" : "string"
+        },
+        "userdata" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TagHistoryItem" : {
+      "type" : "object",
+      "properties" : {
+        "lastSeenInNetwork" : {
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "locationId" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "epcData" : {
+          "format" : "byte",
+          "type" : "string"
+        },
+        "userData" : {
+          "format" : "byte",
+          "type" : "string"
+        }
+      }
+    },
+    "Notification" : {
+      "type" : "object",
+      "properties" : {
+        "notificationID" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "notificationType" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "receivedDatetime" : {
+          "type" : "string"
+        },
+        "status" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "NotificationEmail" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "notificationType" : {
+          "type" : "string"
+        },
+        "toList" : {
+          "type" : "string"
+        },
+        "subject" : {
+          "type" : "string"
+        },
+        "body" : {
+          "type" : "string"
+        },
+        "status" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
