@@ -1,7 +1,6 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "host" : "MyHost",
     "version" : "1.0.0",
     "title" : "Zebra CAI API",
     "description" : "Clinical Asset Intelligence ASP.NET Core Web API",
