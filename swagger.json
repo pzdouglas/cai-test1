@@ -1,5 +1,6 @@
 {
   "swagger" : "2.0",
+  "host" : "cai-test.zebra.com",
   "info" : {
     "version" : "1.0.0",
     "title" : "Zebra CAI API",
